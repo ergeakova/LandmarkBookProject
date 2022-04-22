@@ -10,13 +10,18 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    var landmarkNames = [String]()
+    var landmarkImage = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
         
-        var landmarkNames = [String]()
+
         landmarkNames.append("Colosseum")
         landmarkNames.append("Aifel")
         landmarkNames.append("Galata")
@@ -25,7 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         landmarkNames.append("Stonehenge")
         landmarkNames.append("Taj Mahal")
         
-        var landmarkImage = [UIImage]()
+
         landmarkImage.append(UIImage(named: "colosseum.jpg")!)
         landmarkImage.append(UIImage(named: "aifel.jpg")!)
         landmarkImage.append(UIImage(named: "galata.jpg")!)
@@ -38,12 +43,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "test"
+        cell.textLabel?.text = landmarkNames[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return landmarkNames.count
     }
 
 }
