@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         
 
+        //Landmark data
         landmarkNames.append("Colosseum")
         landmarkNames.append("Aifel")
         landmarkNames.append("Galata")
@@ -29,7 +30,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         landmarkNames.append("Kremlin")
         landmarkNames.append("Stonehenge")
         landmarkNames.append("Taj Mahal")
-        
 
         landmarkImage.append(UIImage(named: "colosseum.jpg")!)
         landmarkImage.append(UIImage(named: "aifel.jpg")!)
@@ -38,7 +38,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         landmarkImage.append(UIImage(named: "kremlin.jpg")!)
         landmarkImage.append(UIImage(named: "stonehenge.jpg")!)
         landmarkImage.append(UIImage(named: "tajMahal.jpg")!)
-        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            landmarkNames.remove(at: indexPath.row)
+            landmarkImage.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
