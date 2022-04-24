@@ -11,18 +11,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
-    
     var landmarkNames = [String]()
     var landmarkImage = [UIImage]()
+    var chosenLandmarkName = ""
+    var chosenLandmarkImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-        
 
-        //Landmark data
         landmarkNames.append("Colosseum")
         landmarkNames.append("Aifel")
         landmarkNames.append("Galata")
@@ -38,6 +36,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         landmarkImage.append(UIImage(named: "kremlin.jpg")!)
         landmarkImage.append(UIImage(named: "stonehenge.jpg")!)
         landmarkImage.append(UIImage(named: "tajMahal.jpg")!)
+        
+        navigationItem.title = "Landmark Book"
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -58,5 +58,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return landmarkNames.count
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chosenLandmarkName = landmarkNames[indexPath.row]
+        chosenLandmarkImage = landmarkImage[indexPath.row]
+        performSegue(withIdentifier: "toImageViewController", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toImageViewController"{
+            let destinatonVC = segue.destination as! ImageViewController
+            destinatonVC.selectedLandmarkName = chosenLandmarkName
+            destinatonVC.selectedLandmarkImage = chosenLandmarkImage
+        }
+    }
 }
-
